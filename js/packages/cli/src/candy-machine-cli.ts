@@ -631,7 +631,8 @@ programCommand('create_candy_machine')
 programCommand('update_candy_machine')
   .option(
     '-d, --date <string>',
-    'timestamp - eg "04 Dec 1995 00:12:00 GMT" or "now"',
+    'timestamp - eg "04 Dec 1995 00:12:00 GMT" or "now" or "never"\n' +
+      '(never = 1000 years in the future, will stop minting)',
   )
   .option('-p, --price <string>', 'SOL price')
   .option(

@@ -74,11 +74,16 @@ export function parsePrice(price: string, mantissa: number = LAMPORTS_PER_SOL) {
   return Math.ceil(parseFloat(price) * mantissa);
 }
 
-export function parseDate(date) {
-  if (date === 'now') {
-    return Date.now() / 1000;
-  }
-  return Date.parse(date) / 1000;
+export function parseDate(rawDate: string) {
+  let date: Date;
+  if (rawDate === 'now') date = new Date();
+  else if (rawDate == 'never') {
+    date = new Date();
+    // never = 1000 years in the future
+    date.setFullYear(date.getFullYear() + 1000);
+  } else date = new Date(rawDate);
+
+  return date.getTime() / 1000;
 }
 
 export const getMultipleAccounts = async (
